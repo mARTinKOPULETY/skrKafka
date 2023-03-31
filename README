@@ -1,0 +1,18 @@
+Application "skrkafka" saves data from another("KAFKA-HW-V4" it is on GitHub too) app into a MySQL database.
+
+HTTP:
+http://localhost:8067/api/v1/database/data
+
+Query for select URL from long String of data from  Wikimedia:
+
+SELECT
+    id,
+    original_id,
+    SUBSTR(
+        SUBSTRING_INDEX(SUBSTRING_INDEX(wiki_event_data,',',2),',',-1),
+        16,
+        LENGTH(SUBSTRING_INDEX(SUBSTRING_INDEX(wiki_event_data,',',2),',',-1))-16
+    ) AS URL,
+    wiki_event_data
+FROM
+    name_of_the_database.filtered_wikimedia;
